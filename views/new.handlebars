@@ -1,0 +1,115 @@
+<!-- ./views/addUpdate.handlebars -->
+
+<div class="container mx-auto p-5 my-5 bg-light text-light">
+    <h2 class="text-center text-info">{{{action}}}新增餐廳資料</h2>
+    <div class="p-3 mt-3">
+        <h6 class="text-secondary"><small>(<i class="fas fa-star-of-life text-danger"></i>)</small> 代表必填欄位</h6>
+
+
+        <form action="/restaurants" method="POST" class="font-weight-light">
+            <!-- name  -->
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label text-secondary">中文名稱 <small>(<i
+                            class="fas fa-star-of-life text-danger"></i>)</small></label>
+                <div class="col-sm-10">
+                    <input type="name" name="name" class="form-control" id="name" placeholder="中文名稱"
+                        value="{{{restaurant.name}}}" required>
+                </div>
+            </div>
+
+            <!-- name_en -->
+            <div class="form-group row">
+                <label for="name_en" class="col-sm-2 col-form-label text-secondary">英文名稱 <small>(<i
+                            class="fas fa-star-of-life text-danger"></i>)</small></label>
+                <div class="col-sm-10">
+                    <input type="name" name="name_en" class="form-control" id="name_en" placeholder="英文名稱"
+                        value="{{{restaurant.name_en}}}" required>
+                </div>
+            </div>
+
+            <!-- category  -->
+            <div class="form-group row">
+                <label for="category" class="col-sm-2 col-form-label text-secondary">類別 <small>(<i
+                            class="fas fa-star-of-life text-danger"></i>)</small></label>
+                <div class="col-sm-10">
+                    <input type="text" name="category" class="form-control" id="category" placeholder="中式簡餐、日本料理...etc."
+                        value="{{{restaurant.category}}}" required>
+                </div>
+            </div>
+
+            <!-- phone  -->
+            <div class="form-group row">
+                <label for="phone" class="col-sm-2 col-form-label text-secondary align-self-center">電話 <small>(<i
+                            class="fas fa-star-of-life text-danger"></i>)</small></label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="phone" class="form-control" id="phone" placeholder="02-28825252"
+                        maxlength="11" value="{{{restaurant.phone}}}" required>
+                </div>
+
+            </div>
+
+            <!-- location  -->
+            <div class="form-group row">
+                <label for="location" class="col-sm-2 col-form-label text-secondary">地點</label>
+                <div class="col-sm-10">
+                    <input type="text" name="location" class="form-control" id="location" placeholder="餐廳地址"
+                        value="{{{restaurant.location}}}">
+                </div>
+            </div>
+
+            <!-- google_map  -->
+            <div class="form-group row">
+                <label for="google_map" class="col-sm-2 col-form-label text-secondary">Google Map</label>
+                <div class="col-sm-10">
+                    <input type="text" name="google_map" class="form-control" id="google_map"
+                        placeholder="以 Google Map 顯示餐廳位置的URL" value="{{{restaurant.google_map}}}">
+                </div>
+            </div>
+
+            <!-- rating  -->
+            <div class="form-group row">
+                <label for="rating" class="col-sm-2 col-form-label text-secondary">評分 <small>(<i
+                            class="fas fa-star-of-life text-danger"></i>)</small></label>
+                <div class="col-sm-5">
+                    <input type="number" name="rating" class="form-control" id="rating" min="0" max="5" step="0.1"
+                        placeholder="0 ~ 5 之間，每次增加 0.1" value="{{{restaurant.rating}}}" required>
+                </div>
+            </div>
+
+            <!-- image  -->
+            <div class="form-group row">
+                <label for="image" class="col-sm-2 col-form-label text-secondary">照片網址 </label>
+                <div class="col-sm-10">
+                    <input type="text" name="image" class="form-control" id="image" placeholder="餐廳照片URL連結"
+                        value="{{{restaurant.image}}}">
+                </div>
+            </div>
+
+            <!-- description  -->
+            <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label text-secondary align-self-center">簡介</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <label for="description" class="text-secondary count-description">輸入餐廳簡介(上限200字) </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <textarea name="description" id="description" cols="48" rows="3"
+                                maxlength="200">{{{restaurant.description}}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary" id="createItem">送出</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
