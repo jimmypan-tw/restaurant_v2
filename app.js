@@ -25,6 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // 使用 express session 
 app.use(session({
     secret: 'abcde',                // secret: 定義一組自己的私鑰（字串)
+    resave: 'false',
+    saveUninitialized: 'false'
 }))
 // 使用 Passport 
 app.use(passport.initialize())
