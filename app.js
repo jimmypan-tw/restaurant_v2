@@ -1,6 +1,13 @@
 // Include express from node_modules
 const express = require('express')
 const app = express()
+
+// 判別開發環境
+// 如果不是 production 模式, 使用 dotenv 讀取 .env 檔案
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
 // Define server related variables
 const port = 3001
 
@@ -58,6 +65,7 @@ const Restaurant = require('./models/restaurant.js')
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
 app.use('/users', require('./routes/user'))
+app.use('/auth', require('./routes/auths'))
 
 app.listen(port, () => {
     console.log(`Express is listening on http://localhost:${port}`)
