@@ -6,13 +6,16 @@ const methodOverride = require('method-override')
 // 設定 method-override
 router.use(methodOverride('_method'))
 
+// 載入auth middleware
+const { authenticated } = require('../config/auth')
+
 // 新增一筆 restaurant 的資料頁面
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
     return res.render('new')
 })
 
 // sort
-router.get('/sort', (req, res) => {
+router.get('/sort', authenticated, (req, res) => {
     console.log(req._parsedOriginalUrl.query)
     switch (req._parsedOriginalUrl.query) {
         case 'atoz':
@@ -42,7 +45,7 @@ router.get('/sort', (req, res) => {
 })
 
 // 新增一筆 restaurant
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
     const restaurant = new Restaurant({
         name: req.body.name,
         name_en: req.body.name_en,
@@ -63,7 +66,7 @@ router.post('/', (req, res) => {
 
 
 // 檢視一筆 restaurant 詳細資料
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
         return res.render('show', { restaurant: restaurant })
@@ -71,7 +74,7 @@ router.get('/:id', (req, res) => {
 })
 
 // 修改一筆 restaurant 的頁面
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
         return res.render('edit', { restaurant: restaurant })
@@ -79,7 +82,7 @@ router.get('/:id/edit', (req, res) => {
 })
 
 // 修改一筆 restaurant
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticated, (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
         console.log("req.params: ", req.params)
@@ -102,7 +105,7 @@ router.put('/:id', (req, res) => {
 })
 
 // 刪除一筆 restaurant
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
         restaurant.remove(err => {

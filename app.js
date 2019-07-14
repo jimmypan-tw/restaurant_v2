@@ -18,6 +18,10 @@ const exphbs = require('express-handlebars')
 const session = require('express-session')
 const passport = require('passport')
 
+// 載入 connect-flash   
+const flash = require('connect-flash')
+app.use(flash())
+
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -41,9 +45,19 @@ app.use(passport.session())
 
 // 載入 Passport config
 require('./config/passport')(passport) // 是一個 Passport 套件的 instance
+
 // 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
+// 建立 local variables
 app.use((req, res, next) => {
     res.locals.user = req.user
+
+    // 辨識使用者是否已經登入的變數，讓 view 可以使用
+    res.locals.isAuthenticated = req.isAuthenticated()
+
+    // 新增兩個 flash message 變數 
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.warning_msg = req.flash('warning_msg')
+
     next()
 })
 
